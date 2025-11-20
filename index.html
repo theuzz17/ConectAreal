@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bairro Conectado - Plataforma colaborativa que conecta moradores, profissionais, comércios e instituições do bairro">
+    <meta name="theme-color" content="#2d8659">
+    <title>Bairro Conectado - Conectando Pessoas, Serviços e Oportunidades</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-brand">
+                    <span class="logo-icon">🌍</span>
+                    <span class="logo-text">Bairro Conectado</span>
+                </div>
+                
+                <button class="navbar-toggle" id="navbarToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="navbar-menu" id="navbarMenu">
+                    <li><a href="#home" class="nav-link">Início</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#profissionais" class="nav-link">Profissionais</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+
+                <button class="btn btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'})">Cadastre-se</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Bem-vindo ao Bairro Conectado</div>
+                <h1 class="hero-title">Conectando <span class="gradient-text">Pessoas, Serviços e Oportunidades</span></h1>
+                <p class="hero-subtitle">Uma plataforma colaborativa que une moradores, profissionais, comércios e instituições para fortalecer a cidadania e o desenvolvimento territorial do seu bairro.</p>
+                <div class="hero-buttons">
+                    <a href="#servicos" class="btn btn-primary btn-lg">Explorar Serviços</a>
+                    <a href="#contato" class="btn btn-outline btn-lg">Cadastre-se Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="servicos" class="search-section">
+        <div class="container">
+            <h2 class="section-title">Encontre o que Precisa</h2>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar serviços, profissionais, comércios..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="todos">Todos</button>
+                <button class="filter-tab" data-filter="servicos">Serviços</button>
+                <button class="filter-tab" data-filter="profissionais">Profissionais</button>
+                <button class="filter-tab" data-filter="comercios">Comércios</button>
+                <button class="filter-tab" data-filter="instituicoes">Instituições</button>
+            </div>
+
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Residents Section -->
+    <section class="residents-section">
+        <div class="container">
+            <h2 class="section-title">Para Moradores</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Conecte-se</h3>
+                    <p>Conheça seus vizinhos e forme comunidades de interesse</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Encontre Serviços</h3>
+                    <p>Acesse profissionais e comércios locais de confiança</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Aprenda</h3>
+                    <p>Acesse conteúdos educativos sobre cidadania e desenvolvimento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+        <div class="container">
+            <h2 class="section-title">Educomunicação</h2>
+            <p class="section-subtitle">Conteúdos educativos para fortalecer a cidadania e o desenvolvimento territorial</p>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">📚</div>
+                    <h3>Desenvolvimento Territorial Sustentável</h3>
+                    <p>Aprenda como contribuir para o desenvolvimento do seu bairro</p>
+                    <a href="#" class="read-more">Saiba mais →</a>
+                </div>
+                <div class="education-card">
+                    <div class="education-icon">🏛️</div>
+                    <h3>Cidadania Ativa</h3>
+                    <p>Direitos e deveres do cidadão na comunidade</p>
+                    <a href="#" class="read-more">Saiba mais →</a>
+                </div>
+                <div class="education-card">
+                    <div class="education-icon">🤝</div>
+                    <h3>Economia Solidária</h3>
+                    <p>Modelos de negócios colaborativos e sustentáveis</p>
+                    <a href="#" class="read-more">Saiba mais →</a>
+                </div>
+                <div class="education-card">
+                    <div class="education-icon">📢</div>
+                    <h3>Comunicação Comunitária</h3>
+                    <p>Ferramentas para fortalecer a comunicação local</p>
+                    <a href="#" class="read-more">Saiba mais →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professionals Section -->
+    <section id="profissionais" class="professionals-section">
+        <div class="container">
+            <h2 class="section-title">Profissionais do Bairro</h2>
+            <p class="section-subtitle">Conecte-se com profissionais qualificados e confiáveis</p>
+            <div class="professionals-grid" id="professionalsGrid">
+                <!-- Professionals will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Pronto para Conectar?</h2>
+            <p>Cadastre-se agora e faça parte de uma comunidade que valoriza a colaboração e o desenvolvimento territorial.</p>
+            <a href="#contato" class="btn btn-cta">Cadastrar Agora</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="section-subtitle">Tem dúvidas ou sugestões? Queremos ouvir você!</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Email</h3>
+                        <p class="info-text">contato@bairroconectado.com</p>
+                        <small>Responderemos em 24h</small>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>Telefone</h3>
+                        <p class="info-text">(11) 9999-9999</p>
+                        <small>Seg-Sex: 9h às 18h</small>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📍</div>
+                        <h3>Localização</h3>
+                        <p class="info-text">Seu Bairro, Cidade - SP</p>
+                        <small>Visite nosso escritório</small>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="sugestao">Sugestão</option>
+                            <option value="reclamacao">Reclamação</option>
+                            <option value="parceria">Parceria</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bairro Conectado</h3>
+                    <p>Conectando moradores, profissionais, comércios e instituições para fortalecer a cidadania e o desenvolvimento territorial.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#profissionais">Profissionais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>📞 (11) 9999-9999</li>
+                        <li>📧 contato@bairroconectado.com</li>
+                        <li>📍 Seu Bairro, Cidade - SP</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">𝕏</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bairro Conectado. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
