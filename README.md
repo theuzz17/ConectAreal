@@ -1,4 +1,4 @@
-﻿🌐 Conecta Areal
+﻿🌐 ConectAreal
 Plataforma digital comunitária do Bairro do Areal — Mamanguape/PB
 📌 Sobre o Projeto
 
@@ -37,4 +37,5 @@ Sugestões, eventos, avisos importantes e oportunidades.
 HTML5
 CSS
 JavaScript
+
 
