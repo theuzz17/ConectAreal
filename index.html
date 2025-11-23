@@ -3,202 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bairro Conectado - Plataforma colaborativa que conecta moradores, profissionais, comércios e instituições do bairro">
+    <meta name="description" content="ConectAreal - Plataforma colaborativa do bairro Areal, Mamanguape - PB.">
     <meta name="theme-color" content="#2d8659">
-    <title>Bairro Conectado - Conectando Pessoas, Serviços e Oportunidades</title>
+    <title>ConectAreal - Conectando Pessoas e Serviços</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
+    <nav class="barra-navegacao" id="barraNavegacao">
         <div class="container">
-            <div class="navbar-content">
-                <div class="navbar-brand">
-                    <span class="logo-icon">🌍</span>
-                    <span class="logo-text">ConectAreal</span>
+            <div class="conteudo-barra-navegacao">
+                <div class="marca-barra-navegacao">
+                    <span class="icone-logo">🌍</span>
+                    <span>ConectAreal</span>
                 </div>
-                
-                <button class="navbar-toggle" id="navbarToggle">
+
+                <button class="alternador-barra-navegacao" id="alternadorBarraNavegacao">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
 
-                <ul class="navbar-menu" id="navbarMenu">
-                    <li><a href="#home" class="nav-link">Início</a></li>
-                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
-                    <li><a href="#profissionais" class="nav-link">Profissionais</a></li>
-                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                <ul class="menu-barra-navegacao" id="menuBarraNavegacao">
+                    <li><a href="#inicio" class="link-navegacao">Início</a></li>
+                    <li><a href="#estabelecimentos" class="link-navegacao">Estabelecimentos</a></li>
+                    <li><a href="#prestadores" class="link-navegacao">Prestadores</a></li>
+                    <li><a href="#contato" class="link-navegacao">Contato</a></li>
                 </ul>
 
-                <button class="btn btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'})">Cadastre-se</button>
+                <button class="btn btn-primario" onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'})">Cadastre-se</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background"></div>
+    <section id="inicio" class="secao-hero">
+        <div class="fundo-hero"></div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">Bem-vindo ao ConectAreal</div>
-                <h1 class="hero-title">Conectando <span class="gradient-text">Pessoas, Serviços e Oportunidades</span></h1>
-                <p class="hero-subtitle">Uma plataforma colaborativa que une moradores, profissionais, comércios e instituições para fortalecer a cidadania e o desenvolvimento territorial do seu bairro.</p>
-                <div class="hero-buttons">
-                    <a href="#servicos" class="btn btn-primary btn-lg">Explorar Serviços</a>
-                    <a href="#contato" class="btn btn-outline btn-lg">Cadastre-se Agora</a>
+            <div class="conteudo-hero">
+                <div class="emblema-hero">Bem-vindo ao ConectAreal</div>
+                <h1 class="titulo-hero">Conectando <span class="texto-gradiente">Pessoas, Serviços e Oportunidades</span></h1>
+                <p class="subtitulo-hero">Plataforma colaborativa que une moradores, profissionais e comércios locais.</p>
+                <div class="botoes-hero">
+                    <a href="#estabelecimentos" class="btn btn-primario btn-lg">Explorar Serviços</a>
+                    <a href="#contato" class="btn btn-contorno btn-lg">Cadastre-se Agora</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Search Section -->
-    <section id="servicos" class="search-section">
+    <section id="estabelecimentos" class="secao-busca">
         <div class="container">
-            <h2 class="section-title">Encontre o que Precisa</h2>
-            
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Buscar serviços, profissionais, comércios..." class="search-input">
-                <button class="search-btn">🔍</button>
+            <h2 class="titulo-secao">Encontre o que Precisa</h2>
+            <div class="barra-busca">
+                <input type="text" id="entradaBusca" placeholder="Buscar serviços, profissionais, comércios..." class="entrada-busca">
+                <button class="btn-busca">🔍</button>
             </div>
 
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-filter="todos">Todos</button>
-                <button class="filter-tab" data-filter="servicos">Serviços</button>
-                <button class="filter-tab" data-filter="profissionais">Profissionais</button>
-                <button class="filter-tab" data-filter="comercios">Comércios</button>
-                <button class="filter-tab" data-filter="instituicoes">Instituições</button>
+            <div class="abas-filtro">
+                <button class="aba-filtro ativo" data-filter="todos">Todos</button>
+                <button class="aba-filtro" data-filter="servicos">Serviços</button>
+                <button class="aba-filtro" data-filter="profissionais">Profissionais</button>
+                <button class="aba-filtro" data-filter="comercios">Comércios</button>
+                <button class="aba-filtro" data-filter="instituicoes">Instituições</button>
             </div>
 
-            <div class="services-grid" id="servicesGrid">
-                <!-- Services will be inserted here by JavaScript -->
-            </div>
+            <div class="grade-servicos" id="gradeServicos"></div>
         </div>
     </section>
 
-    <!-- Residents Section -->
-    <section class="residents-section">
+    <section class="secao-moradores">
         <div class="container">
-            <h2 class="section-title">Para Moradores</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
+            <h2 class="titulo-secao">Para Moradores</h2>
+            <div class="grade-recursos">
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">👥</div>
                     <h3>Conecte-se</h3>
-                    <p>Conheça seus vizinhos e forme comunidades de interesse</p>
+                    <p>Conheça seus vizinhos e forme redes de apoio locais.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">🔍</div>
                     <h3>Encontre Serviços</h3>
-                    <p>Acesse profissionais e comércios locais de confiança</p>
+                    <p>Profissionais e comércios locais de confiança.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">📚</div>
                     <h3>Aprenda</h3>
-                    <p>Acesse conteúdos educativos sobre cidadania e desenvolvimento</p>
+                    <p>Conteúdos educativos para a comunidade.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section class="education-section">
+    <section class="secao-educacao">
         <div class="container">
-            <h2 class="section-title">Educomunicação</h2>
-            <p class="section-subtitle">Conteúdos educativos para fortalecer a cidadania e o desenvolvimento territorial</p>
-            <div class="education-grid">
-                <div class="education-card">
-                    <div class="education-icon">📚</div>
-                    <h3>Desenvolvimento Territorial Sustentável</h3>
-                    <p>Aprenda como contribuir para o desenvolvimento do seu bairro</p>
-                    <a href="#" class="read-more">Saiba mais →</a>
+            <h2 class="titulo-secao">Educomunicação</h2>
+            <p class="subtitulo-secao">Conteúdos educativos para fortalecer a cidadania.</p>
+            <div class="grade-educacao">
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">📚</div>
+                    <h3>Desenvolvimento Territorial</h3>
+                    <p>Como contribuir para o seu bairro.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
                 </div>
-                <div class="education-card">
-                    <div class="education-icon">🏛️</div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">🏛️</div>
                     <h3>Cidadania Ativa</h3>
-                    <p>Direitos e deveres do cidadão na comunidade</p>
-                    <a href="#" class="read-more">Saiba mais →</a>
+                    <p>Direitos e deveres na comunidade.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
                 </div>
-                <div class="education-card">
-                    <div class="education-icon">🤝</div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">🤝</div>
                     <h3>Economia Solidária</h3>
-                    <p>Modelos de negócios colaborativos e sustentáveis</p>
-                    <a href="#" class="read-more">Saiba mais →</a>
+                    <p>Negócios colaborativos e sustentáveis.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
                 </div>
-                <div class="education-card">
-                    <div class="education-icon">📢</div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">📢</div>
                     <h3>Comunicação Comunitária</h3>
-                    <p>Ferramentas para fortalecer a comunicação local</p>
-                    <a href="#" class="read-more">Saiba mais →</a>
+                    <p>Ferramentas para fortalecer a comunicação local.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Professionals Section -->
-    <section id="profissionais" class="professionals-section">
+    <section id="prestadores" class="secao-profissionais">
         <div class="container">
-            <h2 class="section-title">Profissionais do Bairro</h2>
-            <p class="section-subtitle">Conecte-se com profissionais qualificados e confiáveis</p>
-            <div class="professionals-grid" id="professionalsGrid">
-                <!-- Professionals will be inserted here by JavaScript -->
-            </div>
+            <h2 class="titulo-secao">Prestadores de Serviço do Bairro</h2>
+            <p class="subtitulo-secao">Conecte-se com profissionais qualificados.</p>
+            <div class="grade-profissionais" id="gradePrestadores"></div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="secao-cta">
         <div class="container">
             <h2>Pronto para Conectar?</h2>
-            <p>Cadastre-se agora e faça parte de uma comunidade que valoriza a colaboração e o desenvolvimento territorial.</p>
-            <a href="#contato" class="btn btn-cta">Cadastrar Agora</a>
+            <p>Cadastre-se e faça parte da comunidade.</p>
+            <a href="#contato" class="btn btn-acao">Cadastrar Agora</a>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contato" class="contact-section">
+    <section id="contato" class="secao-contato">
         <div class="container">
-            <h2 class="section-title">Entre em Contato</h2>
-            <p class="section-subtitle">Tem dúvidas ou sugestões? Queremos ouvir você!</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-card">
-                        <div class="info-icon">📧</div>
+            <h2 class="titulo-secao">Entre em Contato</h2>
+            <p class="subtitulo-secao">Tem dúvidas ou sugestões? Queremos ouvir você!</p>
+            <div class="conteudo-contato">
+                <div class="informacoes-contato">
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📧</div>
                         <h3>Email</h3>
-                        <p class="info-text">arealconect@gmail.com</p>
+                        <p class="texto-informacao">arealconect@gmail.com</p>
                         <small>Responderemos em 24h</small>
                     </div>
-                    <div class="info-card">
-                        <div class="info-icon">📞</div>
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📞</div>
                         <h3>Telefone</h3>
-                        <p class="info-text">(81)997654263</p>
+                        <p class="texto-informacao">(81) 99765-4263</p>
                         <small>Seg-Sex: 9h às 18h</small>
                     </div>
-                    <div class="info-card">
-                        <div class="info-icon">📍</div>
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📍</div>
                         <h3>Localização</h3>
-                        <p class="info-text">Bairro Do Areal, Mamanguape - PB</p>
+                        <p class="texto-informacao">Bairro do Areal, Mamanguape - PB</p>
                         <small>Visite nosso escritório</small>
                     </div>
                 </div>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
+                <form id="formularioContato" class="formulario-contato">
+                    <div class="grupo-formulario">
                         <label for="name">Nome Completo</label>
                         <input type="text" id="name" name="name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="grupo-formulario">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    <div class="form-group">
+                    <div class="grupo-formulario">
                         <label for="phone">Telefone</label>
                         <input type="tel" id="phone" name="phone">
                     </div>
-                    <div class="form-group">
+                    <div class="grupo-formulario">
                         <label for="subject">Assunto</label>
                         <select id="subject" name="subject" required>
                             <option value="">Selecione um assunto</option>
@@ -209,53 +195,52 @@
                             <option value="outro">Outro</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="grupo-formulario">
                         <label for="message">Mensagem</label>
                         <textarea id="message" name="message" rows="6" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                    <button type="submit" class="btn btn-primario btn-bloco">Enviar Mensagem</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="rodape">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="conteudo-rodape">
+                <div class="secao-rodape">
                     <h3>ConectAreal</h3>
-                    <p>Conectando moradores, profissionais, comércios e instituições para fortalecer a cidadania e o desenvolvimento territorial.</p>
+                    <p>Conectando moradores, profissionais e comércios locais.</p>
                 </div>
-                <div class="footer-section">
+                <div class="secao-rodape">
                     <h4>Links Rápidos</h4>
                     <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#profissionais">Profissionais</a></li>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#estabelecimentos">Serviços</a></li>
+                        <li><a href="#prestadores">Profissionais</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div class="secao-rodape">
                     <h4>Contato</h4>
                     <ul>
-                        <li>📞 (81)997654263</li>
+                        <li>📞 (81) 99765-4263</li>
                         <li>📧 arealconect@gmail.com</li>
                         <li>📍 Bairro do Areal, Mamanguape - PB</li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div class="secao-rodape">
                     <h4>Redes Sociais</h4>
-                    <div class="social-links">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">📷</a>
-                        <a href="#" class="social-link">𝕏</a>
+                    <div class="links-sociais">
+                        <a href="#" class="link-social">f</a>
+                        <a href="#" class="link-social">📷</a>
+                        <a href="#" class="link-social">𝕏</a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="rodape-inferior">
                 <p>&copy; 2025 ConectAreal. Todos os direitos reservados.</p>
-                <div class="footer-links">
+                <div class="links-rodape">
                     <a href="#">Privacidade</a>
                     <a href="#">Termos de Uso</a>
                     <a href="#">Cookies</a>
@@ -264,6 +249,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

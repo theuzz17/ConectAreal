@@ -37,8 +37,6 @@ Sugestões, eventos, avisos importantes e oportunidades.
 🧱 Tecnologias Utilizadas
 
 HTML5
-
 CSS
-
 JavaScript
 

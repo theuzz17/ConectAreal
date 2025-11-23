@@ -1,389 +1,337 @@
-// ============================================
-// DADOS DO SITE
-// ============================================
-
-const services = [
+const estabelecimentos = [
     {
         id: 1,
-        title: "Encanador Profissional",
-        category: "profissionais",
-        description: "Serviços de encanamento residencial e comercial com garantia",
-        rating: 4.8,
-        reviews: 24,
-        location: "Centro do Bairro"
+        titulo: "Encanador Profissional",
+        categoria: "profissionais",
+        descricao: "Serviços de encanamento residencial e comercial com garantia",
+        avaliacao: 4.8,
+        avaliacoes: 24,
+        localizacao: "Centro do Bairro"
     },
     {
         id: 2,
-        title: "Padaria Artesanal",
-        category: "comercios",
-        description: "Pães frescos e bolos caseiros todos os dias",
-        rating: 4.9,
-        reviews: 45,
-        location: "Rua Principal"
+        titulo: "Padaria Artesanal",
+        categoria: "comercios",
+        descricao: "Pães frescos e bolos caseiros todos os dias",
+        avaliacao: 4.9,
+        avaliacoes: 45,
+        localizacao: "Rua Principal"
     },
     {
         id: 3,
-        title: "Aulas de Reforço Escolar",
-        category: "servicos",
-        description: "Reforço em matemática, português e inglês para crianças",
-        rating: 4.7,
-        reviews: 18,
-        location: "Próximo à Escola"
+        titulo: "Aulas de Reforço Escolar",
+        categoria: "servicos",
+        descricao: "Reforço em matemática, português e inglês para crianças",
+        avaliacao: 4.7,
+        avaliacoes: 18,
+        localizacao: "Próximo à Escola"
     },
     {
         id: 4,
-        title: "Clínica de Saúde",
-        category: "instituicoes",
-        description: "Atendimento médico geral e especializado com agendamento",
-        rating: 4.6,
-        reviews: 52,
-        location: "Avenida Central"
+        titulo: "Clínica de Saúde",
+        categoria: "instituicoes",
+        descricao: "Atendimento médico geral e especializado com agendamento",
+        avaliacao: 4.6,
+        avaliacoes: 52,
+        localizacao: "Avenida Central"
     },
     {
         id: 5,
-        title: "Salão de Beleza",
-        category: "comercios",
-        description: "Cabelo, manicure, pedicure e estética facial",
-        rating: 4.8,
-        reviews: 36,
-        location: "Rua das Flores"
+        titulo: "Salão de Beleza",
+        categoria: "comercios",
+        descricao: "Cabelo, manicure, pedicure e estética facial",
+        avaliacao: 4.8,
+        avaliacoes: 36,
+        localizacao: "Rua das Flores"
     },
     {
         id: 6,
-        title: "Aulas de Yoga",
-        category: "servicos",
-        description: "Bem-estar e equilíbrio corpo e mente para todas as idades",
-        rating: 4.9,
-        reviews: 28,
-        location: "Parque do Bairro"
+        titulo: "Aulas de Yoga",
+        categoria: "servicos",
+        descricao: "Bem-estar e equilíbrio corpo e mente para todas as idades",
+        avaliacao: 4.9,
+        avaliacoes: 28,
+        localizacao: "Parque do Bairro"
     },
     {
         id: 7,
-        title: "Eletricista",
-        category: "profissionais",
-        description: "Instalações elétricas e manutenção com segurança",
-        rating: 4.7,
-        reviews: 31,
-        location: "Zona Residencial"
+        titulo: "Eletricista",
+        categoria: "profissionais",
+        descricao: "Instalações elétricas e manutenção com segurança",
+        avaliacao: 4.7,
+        avaliacoes: 31,
+        localizacao: "Zona Residencial"
     },
     {
         id: 8,
-        title: "Supermercado Local",
-        category: "comercios",
-        description: "Alimentos frescos, bebidas e produtos de limpeza",
-        rating: 4.5,
-        reviews: 67,
-        location: "Avenida Principal"
+        titulo: "Supermercado Local",
+        categoria: "comercios",
+        descricao: "Alimentos frescos, bebidas e produtos de limpeza",
+        avaliacao: 4.5,
+        avaliacoes: 67,
+        localizacao: "Avenida Principal"
     },
     {
         id: 9,
-        title: "Consultório Odontológico",
-        category: "instituicoes",
-        description: "Limpeza, restauração e tratamentos dentários",
-        rating: 4.8,
-        reviews: 43,
-        location: "Centro"
+        titulo: "Consultório Odontológico",
+        categoria: "instituicoes",
+        descricao: "Limpeza, restauração e tratamentos dentários",
+        avaliacao: 4.8,
+        avaliacoes: 43,
+        localizacao: "Centro"
     },
     {
         id: 10,
-        title: "Aulas de Inglês",
-        category: "servicos",
-        description: "Inglês para crianças, adolescentes e adultos",
-        rating: 4.6,
-        reviews: 22,
-        location: "Centro Educacional"
+        titulo: "Aulas de Inglês",
+        categoria: "servicos",
+        descricao: "Inglês para crianças, adolescentes e adultos",
+        avaliacao: 4.6,
+        avaliacoes: 22,
+        localizacao: "Centro Educacional"
     }
 ];
 
-const professionals = [
+const prestadores = [
     {
         id: 1,
-        name: "João Silva",
-        profession: "Encanador",
-        specialties: ["Encanamento", "Hidráulica", "Manutenção"],
-        rating: 4.8,
-        reviews: 24,
-        location: "Centro do Bairro",
-        phone: "(11) 98765-4321",
-        description: "Profissional experiente em serviços de encanamento residencial e comercial com garantia de qualidade.",
-        verified: true
+        nome: "João Silva",
+        profissao: "Encanador",
+        especialidades: ["Encanamento", "Hidráulica", "Manutenção"],
+        avaliacao: 4.8,
+        avaliacoes: 24,
+        localizacao: "Centro do Bairro",
+        telefone: "(11) 98765-4321",
+        descricao: "Profissional experiente em serviços de encanamento residencial e comercial com garantia de qualidade.",
+        verificado: true
     },
     {
         id: 2,
-        name: "Maria Santos",
-        profession: "Eletricista",
-        specialties: ["Instalações", "Manutenção", "Projetos"],
-        rating: 4.7,
-        reviews: 31,
-        location: "Zona Residencial",
-        phone: "(11) 5555-6666",
-        description: "Eletricista certificada com experiência em instalações elétricas seguras e eficientes.",
-        verified: true
+        nome: "Maria Santos",
+        profissao: "Eletricista",
+        especialidades: ["Instalações", "Manutenção", "Projetos"],
+        avaliacao: 4.7,
+        avaliacoes: 31,
+        localizacao: "Zona Residencial",
+        telefone: "(11) 5555-6666",
+        descricao: "Eletricista certificada com experiência em instalações elétricas seguras e eficientes.",
+        verificado: true
     },
     {
         id: 3,
-        name: "Carlos Oliveira",
-        profession: "Pintor",
-        specialties: ["Pintura Residencial", "Pintura Comercial", "Restauração"],
-        rating: 4.6,
-        reviews: 18,
-        location: "Bairro Central",
-        phone: "(11) 7777-8888",
-        description: "Pintor profissional especializado em acabamentos de qualidade e cores personalizadas.",
-        verified: false
+        nome: "Carlos Oliveira",
+        profissao: "Pintor",
+        especialidades: ["Pintura Residencial", "Pintura Comercial", "Restauração"],
+        avaliacao: 4.6,
+        avaliacoes: 18,
+        localizacao: "Bairro Central",
+        telefone: "(11) 7777-8888",
+        descricao: "Pintor profissional especializado em acabamentos de qualidade e cores personalizadas.",
+        verificado: false
     },
     {
         id: 4,
-        name: "Ana Costa",
-        profession: "Personal Trainer",
-        specialties: ["Musculação", "Cardio", "Treinamento Funcional"],
-        rating: 4.9,
-        reviews: 42,
-        location: "Parque do Bairro",
-        phone: "(11) 9999-0000",
-        description: "Personal trainer certificada com foco em resultados e bem-estar do cliente.",
-        verified: true
+        nome: "Ana Costa",
+        profissao: "Personal Trainer",
+        especialidades: ["Musculação", "Cardio", "Treinamento Funcional"],
+        avaliacao: 4.9,
+        avaliacoes: 42,
+        localizacao: "Parque do Bairro",
+        telefone: "(11) 9999-0000",
+        descricao: "Personal trainer certificada com foco em resultados e bem-estar do cliente.",
+        verificado: true
     },
     {
         id: 5,
-        name: "Roberto Ferreira",
-        profession: "Carpinteiro",
-        specialties: ["Móveis", "Reformas", "Acabamentos"],
-        rating: 4.5,
-        reviews: 22,
-        location: "Rua Principal",
-        phone: "(11) 4444-5555",
-        description: "Carpinteiro experiente em projetos personalizados e acabamentos refinados.",
-        verified: true
+        nome: "Roberto Ferreira",
+        profissao: "Carpinteiro",
+        especialidades: ["Móveis", "Reformas", "Acabamentos"],
+        avaliacao: 4.5,
+        avaliacoes: 22,
+        localizacao: "Rua Principal",
+        telefone: "(11) 4444-5555",
+        descricao: "Carpinteiro experiente em projetos personalizados e acabamentos refinados.",
+        verificado: true
     },
     {
         id: 6,
-        name: "Fernanda Lima",
-        profession: "Professora Particular",
-        specialties: ["Matemática", "Português", "Inglês"],
-        rating: 4.8,
-        reviews: 28,
-        location: "Centro Educacional",
-        phone: "(11) 3333-4444",
-        description: "Professora dedicada com metodologia comprovada para melhoria de desempenho escolar.",
-        verified: true
+        nome: "Fernanda Lima",
+        profissao: "Professora Particular",
+        especialidades: ["Matemática", "Português", "Inglês"],
+        avaliacao: 4.8,
+        avaliacoes: 28,
+        localizacao: "Centro Educacional",
+        telefone: "(11) 3333-4444",
+        descricao: "Professora dedicada com metodologia comprovada para melhoria de desempenho escolar.",
+        verificado: true
     }
 ];
 
-// ============================================
-// NAVBAR TOGGLE
-// ============================================
-
 document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggle = document.getElementById('navbarToggle');
-    const navbarMenu = document.getElementById('navbarMenu');
+    const alternarBarraNavegacao = document.getElementById('alternadorBarraNavegacao');
+    const menuBarraNavegacao = document.getElementById('menuBarraNavegacao');
 
-    navbarToggle.addEventListener('click', function() {
-        navbarToggle.classList.toggle('active');
-        navbarMenu.classList.toggle('active');
+    alternarBarraNavegacao.addEventListener('click', function() {
+        alternarBarraNavegacao.classList.toggle('active');
+        menuBarraNavegacao.classList.toggle('active');
     });
 
-    // Fechar menu ao clicar em um link
-    const navLinks = navbarMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
+    const linksNavegacao = menuBarraNavegacao.querySelectorAll('.link-navegacao');
+    linksNavegacao.forEach(link => {
         link.addEventListener('click', function() {
-            navbarToggle.classList.remove('active');
-            navbarMenu.classList.remove('active');
+            alternarBarraNavegacao.classList.remove('active');
+            menuBarraNavegacao.classList.remove('active');
         });
     });
 
-    // Renderizar serviços e profissionais
-    renderServices();
-    renderProfessionals();
+    renderizarEstabelecimentos();
+    renderizarPrestadores();
 
-    // Configurar filtros
-    setupFilters();
-
-    // Configurar formulário de contato
-    setupContactForm();
-
-    // Efeito de scroll na navbar
-    setupNavbarScroll();
+    configurarFiltros();
+    configurarFormularioContato();
+    configurarRolagemBarraNavegacao();
+    iniciarObservadorAnimacao();
 });
 
-// ============================================
-// RENDERIZAR SERVIÇOS
-// ============================================
-
-function renderServices(filter = 'todos', searchQuery = '') {
-    const servicesGrid = document.getElementById('servicesGrid');
+function renderizarEstabelecimentos(filtro = 'todos', termoBusca = '') {
+    const gradeEstabelecimentos = document.getElementById('gradeServicos');
     
-    let filtered = services.filter(service => {
-        const matchesFilter = filter === 'todos' || service.category === filter;
-        const matchesSearch = searchQuery === '' || 
-            service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            service.description.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesFilter && matchesSearch;
+    let filtrados = estabelecimentos.filter(estabelecimento => {
+        const correspondeFiltro = filtro === 'todos' || estabelecimento.categoria === filtro;
+        const correspondeBusca = termoBusca === '' || 
+            estabelecimento.titulo.toLowerCase().includes(termoBusca.toLowerCase()) ||
+            estabelecimento.descricao.toLowerCase().includes(termoBusca.toLowerCase());
+        return correspondeFiltro && correspondeBusca;
     });
 
-    servicesGrid.innerHTML = filtered.map(service => `
-        <div class="service-card">
-            <div class="service-header">
+    gradeEstabelecimentos.innerHTML = filtrados.map(estabelecimento => `
+        <div class="cartao-servico">
+            <div class="cabecalho-servico">
                 <div>
-                    <div class="service-title">${service.title}</div>
-                    <div class="service-category">${service.category}</div>
+                    <div class="titulo-servico">${estabelecimento.titulo}</div>
+                    <div class="categoria-servico">${estabelecimento.categoria}</div>
                 </div>
-                <div class="service-rating">⭐ ${service.rating}</div>
+                <div class="avaliacao-servico">⭐ ${estabelecimento.avaliacao}</div>
             </div>
-            <p class="service-description">${service.description}</p>
-            <div class="service-info">
-                <span>📍 ${service.location}</span>
+            <p class="descricao-servico">${estabelecimento.descricao}</p>
+            <div class="informacao-servico">
+                <span>📍 ${estabelecimento.localizacao}</span>
             </div>
-            <div class="service-footer">
-                <span class="service-reviews">${service.reviews} avaliações</span>
-                <button class="btn btn-primary" onclick="alert('Detalhes do serviço: ${service.title}')">Ver Detalhes</button>
+            <div class="rodape-servico">
+                <span class="avaliacoes-servico">${estabelecimento.avaliacoes} avaliações</span>
+                <button class="btn btn-primario" onclick="alert('Detalhes do estabelecimento: ${estabelecimento.titulo}')">Ver Detalhes</button>
             </div>
         </div>
     `).join('');
 }
 
-// ============================================
-// RENDERIZAR PROFISSIONAIS
-// ============================================
-
-function renderProfessionals() {
-    const professionalsGrid = document.getElementById('professionalsGrid');
+function renderizarPrestadores() {
+    const gradePrestadores = document.getElementById('gradePrestadores');
     
-    professionalsGrid.innerHTML = professionals.map(prof => `
-        <div class="professional-card">
-            <div class="professional-header">
-                <div class="professional-name">${prof.name} ${prof.verified ? '✓' : ''}</div>
-                <div class="professional-title">${prof.profession}</div>
+    gradePrestadores.innerHTML = prestadores.map(prestador => `
+        <div class="cartao-profissional">
+            <div class="cabecalho-profissional">
+                <div class="nome-profissional">${prestador.nome} ${prestador.verificado ? '✓' : ''}</div>
+                <div class="titulo-profissional">${prestador.profissao}</div>
             </div>
-            <div class="professional-body">
-                <p class="professional-description">${prof.description}</p>
-                <div class="professional-specialties">
-                    ${prof.specialties.map(spec => `<span class="specialty-badge">${spec}</span>`).join('')}
+            <div class="corpo-profissional">
+                <p class="descricao-profissional">${prestador.descricao}</p>
+                <div class="especialidades-profissional">
+                    ${prestador.especialidades.map(especialidade => `<span class="emblema-especialidade">${especialidade}</span>`).join('')}
                 </div>
-                <div class="professional-info">
-                    <div class="info-item">⭐ ${prof.rating} (${prof.reviews} avaliações)</div>
-                    <div class="info-item">📍 ${prof.location}</div>
-                    <div class="info-item">📞 ${prof.phone}</div>
+                <div class="informacoes-profissional">
+                    <div class="item-informacao">⭐ ${prestador.avaliacao} (${prestador.avaliacoes} avaliações)</div>
+                    <div class="item-informacao">📍 ${prestador.localizacao}</div>
+                    <div class="item-informacao">📞 ${prestador.telefone}</div>
                 </div>
-                <div class="professional-actions">
-                    <button class="btn btn-primary" onclick="alert('Ligando para ${prof.name}...')">Ligar</button>
-                    <button class="btn btn-outline" onclick="alert('Enviando mensagem para ${prof.name}...')">Mensagem</button>
+                <div class="acoes-profissional">
+                    <button class="btn btn-primario" onclick="alert('Ligando para ${prestador.nome}...')">Ligar</button>
+                    <button class="btn btn-contorno" onclick="alert('Enviando mensagem para ${prestador.nome}...')">Mensagem</button>
                 </div>
             </div>
         </div>
     `).join('');
 }
 
-// ============================================
-// CONFIGURAR FILTROS
-// ============================================
+function configurarFiltros() {
+    const abasFiltro = document.querySelectorAll('.aba-filtro');
+    const entradaBusca = document.getElementById('entradaBusca');
 
-function setupFilters() {
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const searchInput = document.getElementById('searchInput');
-
-    filterTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            // Remover classe active de todos os tabs
-            filterTabs.forEach(t => t.classList.remove('active'));
-            // Adicionar classe active ao tab clicado
-            this.classList.add('active');
+    abasFiltro.forEach(aba => {
+        aba.addEventListener('click', function() {
+            abasFiltro.forEach(a => a.classList.remove('ativo'));
+            this.classList.add('ativo');
             
-            const filter = this.getAttribute('data-filter');
-            const searchQuery = searchInput.value;
-            renderServices(filter, searchQuery);
+            const filtro = this.getAttribute('data-filter');
+            const termoBusca = entradaBusca.value;
+            renderizarEstabelecimentos(filtro, termoBusca);
         });
     });
 
-    // Busca em tempo real
-    searchInput.addEventListener('input', function() {
-        const activeFilter = document.querySelector('.filter-tab.active').getAttribute('data-filter');
-        renderServices(activeFilter, this.value);
+    entradaBusca.addEventListener('input', function() {
+        const filtroAtivo = document.querySelector('.aba-filtro.ativo').getAttribute('data-filter');
+        renderizarEstabelecimentos(filtroAtivo, this.value);
     });
 }
 
-// ============================================
-// CONFIGURAR FORMULÁRIO DE CONTATO
-// ============================================
-
-function setupContactForm() {
-    const contactForm = document.getElementById('contactForm');
+function configurarFormularioContato() {
+    const formularioContato = document.getElementById('formularioContato');
     
-    contactForm.addEventListener('submit', function(e) {
+    formularioContato.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
+        const nome = document.getElementById('name').value;
+        const botaoEnviar = formularioContato.querySelector('button[type="submit"]');
+        const textoOriginal = botaoEnviar.textContent;
         
-        // Simular envio
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        submitBtn.textContent = '⏳ Enviando...';
-        submitBtn.disabled = true;
+        botaoEnviar.textContent = '⏳ Enviando...';
+        botaoEnviar.disabled = true;
         
         setTimeout(() => {
-            alert(`Obrigado ${name}! Sua mensagem foi enviada com sucesso. Responderemos em breve!`);
-            contactForm.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            alert(`Obrigado ${nome}! Sua mensagem foi enviada com sucesso. Responderemos em breve!`);
+            formularioContato.reset();
+            botaoEnviar.textContent = textoOriginal;
+            botaoEnviar.disabled = false;
         }, 1500);
     });
 }
 
-// ============================================
-// EFEITO DE SCROLL NA NAVBAR
-// ============================================
-
-function setupNavbarScroll() {
-    const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
+function configurarRolagemBarraNavegacao() {
+    const barraNavegacao = document.getElementById('barraNavegacao');
 
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
+        const rolagemAtual = window.pageYOffset;
         
-        if (currentScroll > 100) {
-            navbar.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.12)';
+        if (rolagemAtual > 100) {
+            barraNavegacao.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.12)';
         } else {
-            navbar.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
+            barraNavegacao.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
         }
-        
-        lastScroll = currentScroll;
     });
 }
 
-// ============================================
-// OBSERVADOR DE INTERSECÇÃO PARA ANIMAÇÕES
-// ============================================
+function iniciarObservadorAnimacao() {
+    const opcoesObservador = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
+    const observador = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observador.unobserve(entry.target);
+            }
+        });
+    }, opcoesObservador);
 
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observar cards quando a página carrega
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.service-card, .professional-card, .feature-card, .education-card');
+    const cards = document.querySelectorAll('.cartao-servico, .cartao-profissional, .cartao-recurso');
     cards.forEach(card => {
-        observer.observe(card);
+        observador.observe(card);
     });
-});
+    
+    addAnimacaoRolagem();
+}
 
-// ============================================
-// FUNÇÕES UTILITÁRIAS
-// ============================================
-
-// Smooth scroll para links âncora
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -396,21 +344,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Adicionar classe ao elemento quando entra em viewport
-function addScrollAnimation() {
-    const elements = document.querySelectorAll('.service-card, .professional-card');
+function addAnimacaoRolagem() {
+    const elementos = document.querySelectorAll('.cartao-servico, .cartao-profissional');
     
-    const observer = new IntersectionObserver((entries) => {
+    const observador = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
-                observer.unobserve(entry.target);
+                observador.unobserve(entry.target);
             }
         });
     });
     
-    elements.forEach(el => observer.observe(el));
+    elementos.forEach(el => observador.observe(el));
 }
-
-// Executar animação de scroll
-window.addEventListener('load', addScrollAnimation);
