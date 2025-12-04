@@ -278,20 +278,63 @@ function configurarFormularioContato() {
     
     formularioContato.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const nome = document.getElementById('name').value;
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefoneBruto = document.getElementById('telefone').value;
+        const telefoneNumeros = telefoneBruto.replace(/\D/g, '');
+
         const botaoEnviar = formularioContato.querySelector('button[type="submit"]');
         const textoOriginal = botaoEnviar.textContent;
-        
+        const erroEmailEl = document.getElementById('erroEmail');
+        const erroTelefoneEl = document.getElementById('erroTelefone');
+        const mensagemFormularioEl = document.getElementById('mensagemFormulario');
+
+        function limparMensagens() {
+            if (erroEmailEl) erroEmailEl.textContent = '';
+            if (erroTelefoneEl) erroTelefoneEl.textContent = '';
+            if (mensagemFormularioEl) {
+                mensagemFormularioEl.textContent = '';
+                mensagemFormularioEl.className = 'form-mensagem';
+            }
+        }
+
+        limparMensagens();
+
+        const emailValido = /^[^\s@]+@gmail\.com$/i.test(email);
+        if (!emailValido) {
+            if (erroEmailEl) erroEmailEl.textContent = 'Por favor, use um email que termine com @gmail.com.';
+            if (document.getElementById('email')) document.getElementById('email').focus();
+            return;
+        }
+
+        if (telefoneNumeros.length > 0 && telefoneNumeros.length !== 11) {
+            if (erroTelefoneEl) erroTelefoneEl.textContent = 'Por favor, informe um telefone com exatamente 11 dígitos (somente números).';
+            if (document.getElementById('telefone')) document.getElementById('telefone').focus();
+            return;
+        }
+
         botaoEnviar.textContent = '⏳ Enviando...';
         botaoEnviar.disabled = true;
-        
+
         setTimeout(() => {
-            alert(`Obrigado ${nome}! Sua mensagem foi enviada com sucesso. Responderemos em breve!`);
+            if (mensagemFormularioEl) {
+                mensagemFormularioEl.textContent = `Obrigado ${nome}! Sua mensagem foi enviada com sucesso. Responderemos em breve.`;
+                mensagemFormularioEl.classList.add('sucesso');
+            } else {
+                alert(`Obrigado ${nome}! Sua mensagem foi enviada com sucesso. Responderemos em breve.`);
+            }
             formularioContato.reset();
             botaoEnviar.textContent = textoOriginal;
             botaoEnviar.disabled = false;
         }, 1500);
+    });
+    const emailInput = document.getElementById('email');
+    const telefoneInput = document.getElementById('telefone');
+    if (emailInput) emailInput.addEventListener('input', () => {
+        const erroEmailEl = document.getElementById('erroEmail'); if (erroEmailEl) erroEmailEl.textContent = '';
+    });
+    if (telefoneInput) telefoneInput.addEventListener('input', () => {
+        const erroTelefoneEl = document.getElementById('erroTelefone'); if (erroTelefoneEl) erroTelefoneEl.textContent = '';
     });
 }
 
