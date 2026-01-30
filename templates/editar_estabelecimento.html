@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Estabelecimento - {{ estabelecimento.nome }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Editar Estabelecimento</h2>
+
+                    <form id="form-editar" class="needs-validation">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome do Estabelecimento <span class="text-danger">*</span></label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="nome" 
+                                name="nome" 
+                                value="{{ estabelecimento.nome }}"
+                                required
+                                minlength="3"
+                                maxlength="255"
+                            >
+                            <small class="form-text text-muted">Mínimo 3 caracteres</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoria <span class="text-danger">*</span></label>
+                            <select class="form-select" id="categoria" name="categoria" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="profissionais" {% if estabelecimento.categoria == 'profissionais' %}selected{% endif %}>Profissionais</option>
+                                <option value="comercios" {% if estabelecimento.categoria == 'comercios' %}selected{% endif %}>Comércios</option>
+                                <option value="servicos" {% if estabelecimento.categoria == 'servicos' %}selected{% endif %}>Serviços</option>
+                                <option value="instituicoes" {% if estabelecimento.categoria == 'instituicoes' %}selected{% endif %}>Instituições</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descricao" class="form-label">Descrição <span class="text-danger">*</span></label>
+                            <textarea 
+                                class="form-control" 
+                                id="descricao" 
+                                name="descricao" 
+                                rows="4"
+                                required
+                                minlength="10"
+                                maxlength="2000"
+                            >{{ estabelecimento.descricao }}</textarea>
+                            <small class="form-text text-muted">Mínimo 10 caracteres, máximo 2000</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input 
+                                        type="tel" 
+                                        class="form-control" 
+                                        id="telefone" 
+                                        name="telefone" 
+                                        value="{{ estabelecimento.telefone or '' }}"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="email" 
+                                        name="email" 
+                                        value="{{ estabelecimento.email or '' }}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="endereco" 
+                                name="endereco" 
+                                value="{{ estabelecimento.endereco or '' }}"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="localizacao" class="form-label">Localização/Bairro</label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="localizacao" 
+                                name="localizacao" 
+                                value="{{ estabelecimento.localizacao or '' }}"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="website" class="form-label">Website</label>
+                            <input 
+                                type="url" 
+                                class="form-control" 
+                                id="website" 
+                                name="website" 
+                                value="{{ estabelecimento.website or '' }}"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="horario_funcionamento" class="form-label">Horário de Funcionamento</label>
+                            <textarea 
+                                class="form-control" 
+                                id="horario_funcionamento" 
+                                name="horario_funcionamento" 
+                                rows="3"
+                            >{{ estabelecimento.horario_funcionamento or '' }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                            <a href="{{ url_for('estabelecimentos.detalhes_estabelecimento', id=estabelecimento.id) }}" class="btn btn-outline-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+
+                    <div id="alerta-container" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const estabelecimentoId = {{ estabelecimento.id }};
+
+document.getElementById('form-editar').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nome = document.getElementById('nome').value.trim();
+    const categoria = document.getElementById('categoria').value;
+    const descricao = document.getElementById('descricao').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const endereco = document.getElementById('endereco').value.trim();
+    const localizacao = document.getElementById('localizacao').value.trim();
+    const website = document.getElementById('website').value.trim();
+    const horario_funcionamento = document.getElementById('horario_funcionamento').value.trim();
+    
+    if (!nome || !categoria || !descricao) {
+        mostrarAlerta('Por favor, preencha todos os campos obrigatórios', 'danger');
+        return;
+    }
+    
+    const dados = {
+        nome: nome,
+        categoria: categoria,
+        descricao: descricao,
+        telefone: telefone,
+        email: email,
+        endereco: endereco,
+        localizacao: localizacao,
+        website: website,
+        horario_funcionamento: horario_funcionamento
+    };
+    
+    const btn = document.querySelector('button[type="submit"]');
+    const textoOriginal = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Salvando...';
+    
+    fetch(`/estabelecimentos/api/editar/${estabelecimentoId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.sucesso) {
+            mostrarAlerta(data.mensagem, 'success');
+            setTimeout(() => {
+                window.location.href = `{{ url_for('estabelecimentos.detalhes_estabelecimento', id='') }}${estabelecimentoId}`;
+            }, 1500);
+        } else {
+            mostrarAlerta(data.erro || 'Erro ao atualizar estabelecimento', 'danger');
+            btn.disabled = false;
+            btn.textContent = textoOriginal;
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        mostrarAlerta('Erro ao atualizar estabelecimento', 'danger');
+        btn.disabled = false;
+        btn.textContent = textoOriginal;
+    });
+});
+
+function mostrarAlerta(mensagem, tipo) {
+    const container = document.getElementById('alerta-container');
+    container.innerHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+        ${mensagem}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>`;
+}
+</script>
+{% endblock %}

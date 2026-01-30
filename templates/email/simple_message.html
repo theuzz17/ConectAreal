@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <style>
+    /* Inline-friendly styles for email */
+    body { font-family: Arial, Helvetica, sans-serif; background-color: #f6f8f9; margin:0; padding:20px; }
+    .email-wrap { max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .email-header { background: linear-gradient(135deg, #0b6623 0%, #14532d 100%); padding:24px; color:white; text-align:center; }
+    .brand { font-size:20px; font-weight:700; letter-spacing:0.5px; }
+    .email-body { padding:24px; color:#1a1a1a; }
+    .greeting { font-size:18px; margin-bottom:12px; }
+    .message { font-size:15px; line-height:1.6; color:#333333; }
+    .btn { display:inline-block; margin-top:18px; background:#0b6623; color:white; padding:12px 20px; border-radius:6px; text-decoration:none; font-weight:600; }
+    .footer { padding:16px 24px; font-size:13px; color:#777777; background:#fbfbfb; text-align:center; }
+    @media only screen and (max-width:480px){ .email-wrap{padding:0 12px;} .email-body{padding:18px;} }
+  </style>
+</head>
+<body>
+  <div class="email-wrap">
+    <div class="email-header">
+      <div class="brand">🌍 ConectAreal</div>
+    </div>
+    <div class="email-body">
+      <div class="greeting">Olá,</div>
+      <div class="message">{{ message | safe }}</div>
+
+    </div>
+    <div class="footer">A ConectAreal agradece seu contato — <strong>Conectando pessoas e serviços</strong></div>
+  </div>
+</body>
+</html>

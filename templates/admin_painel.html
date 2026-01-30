@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - ConectAreal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}?v=2">
+</head>
+<body class="pagina-admin">
+    <div class="container-admin">
+        <aside class="barra-lateral">
+            <div class="marca-admin">
+                <span class="icone-logo">🌍</span>
+                <span>ConectAreal</span>
+            </div>
+
+            <nav class="menu-lateral">
+                <a href="#" class="item-menu ativo" data-secao="estabelecimentos">
+                    <span class="icone">🏪</span>
+                    <span>Estabelecimentos</span>
+                </a>
+                <a href="#" class="item-menu" data-secao="prestadores">
+                    <span class="icone">👨‍💼</span>
+                    <span>Prestadores</span>
+                </a>
+                <a href="#" class="item-menu" data-secao="mensagens">
+                    <span class="icone">💬</span>
+                    <span>Mensagens</span>
+                </a>
+            </nav>
+
+            <div class="secao-usuario">
+                <div class="info-usuario">
+                    <div class="avatar">👤</div>
+                    <div class="detalhes-usuario">
+                        <p class="nome-usuario">Administrador</p>
+                        <p class="status-usuario">Online</p>
+                    </div>
+                </div>
+                <a href="/admin/logout" class="botao-sair">Sair</a>
+            </div>
+        </aside>
+
+        <main class="conteudo-principal">
+            <header class="cabecalho-admin">
+                <h1 id="titulo-pagina">Gerenciar Estabelecimentos</h1>
+                <button id="btnAdicionar" class="botao-adicionar">+ Adicionar</button>
+            </header>
+
+            <section id="estabelecimentos" class="secao-conteudo ativa">
+                <div class="toolbar">
+                    <input type="text" id="buscaEstabelecimentos" placeholder="Buscar estabelecimentos..." class="entrada-busca">
+                    <select id="filtroCategoria" class="filtro-categoria">
+                        <option value="">Todas as categorias</option>
+                        <option value="comercios">Comércios</option>
+                        <option value="servicos">Serviços</option>
+                        <option value="profissionais">Profissionais</option>
+                        <option value="instituicoes">Instituições</option>
+                    </select>
+                </div>
+                <div id="listaEstabelecimentos" class="tabela-conteudo"></div>
+            </section>
+
+            <section id="prestadores" class="secao-conteudo">
+                <div class="toolbar">
+                    <input type="text" id="buscaPrestadores" placeholder="Buscar prestadores..." class="entrada-busca">
+                </div>
+                <div id="listaPrestadores" class="tabela-conteudo"></div>
+            </section>
+
+            <section id="mensagens" class="secao-conteudo">
+                <div class="toolbar">
+                    <input type="text" id="buscaMensagens" placeholder="Buscar mensagens..." class="entrada-busca">
+                </div>
+                <div id="listaMensagens" class="tabela-conteudo"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modalFormulario" class="modal">
+        <div class="conteudo-modal">
+            <button class="botao-fechar">&times;</button>
+            <h2 id="tituloModal"></h2>
+            <form id="formularioModal" class="formulario-modal"></form>
+        </div>
+    </div>
+
+    <div id="modalConfirmacao" class="modal">
+        <div class="conteudo-modal confirmacao">
+            <h2>Confirmar Exclusão</h2>
+            <p id="textoConfirmacao"></p>
+            <div class="botoes-confirmacao">
+                <button id="btnCancelar" class="botao-cancelar">Cancelar</button>
+                <button id="btnConfirmar" class="botao-deletar">Deletar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalResponder" class="modal">
+        <div class="conteudo-modal">
+            <button class="botao-fechar" onclick="fecharModalResponder()">&times;</button>
+            <h2>Responder Mensagem</h2>
+            <div id="resp-info" style="margin-bottom:10px;"></div>
+            <textarea id="resp-texto" placeholder="Digite sua resposta aqui..." style="width:100%;height:160px;padding:8px;border:1px solid #ccc;border-radius:4px;margin-bottom:8px;"></textarea>
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button class="botao-cancelar" onclick="fecharModalResponder()">Cancelar</button>
+                <button class="botao-enviar" onclick="enviarRespostaModal()">Enviar Resposta</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='admin_painel.js') }}?v=2"></script>
+    <script src="{{ url_for('static', filename='admin_ux.js') }}?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Estabelecimentos - ConectAreal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h1 class="mb-4">Estabelecimentos do Bairro</h1>
+            
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('estabelecimentos.criar_estabelecimento_page') }}" class="btn btn-primary mb-4">
+                    + Cadastrar Estabelecimento
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card p-4">
+                <form id="form-filtros" class="row g-3">
+                    <div class="col-md-5">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="busca" 
+                            name="busca" 
+                            placeholder="Buscar por nome, descrição ou localização..."
+                            value="{{ request.args.get('busca', '') }}"
+                        >
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <select class="form-select" id="categoria" name="categoria">
+                            <option value="">Todas as categorias</option>
+                            <option value="profissionais" {% if request.args.get('categoria') == 'profissionais' %}selected{% endif %}>Profissionais</option>
+                            <option value="comercios" {% if request.args.get('categoria') == 'comercios' %}selected{% endif %}>Comércios</option>
+                            <option value="servicos" {% if request.args.get('categoria') == 'servicos' %}selected{% endif %}>Serviços</option>
+                            <option value="instituicoes" {% if request.args.get('categoria') == 'instituicoes' %}selected{% endif %}>Instituições</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="estabelecimentos-container">
+        {% if estabelecimentos.items %}
+            {% for estabelecimento in estabelecimentos.items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 estabelecimento-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ estabelecimento.nome }}</h5>
+                            
+                            <p class="badge bg-info mb-2">{{ estabelecimento.categoria }}</p>
+                            
+                            <p class="card-text text-muted small">{{ estabelecimento.descricao[:100] }}...</p>
+                            
+                            {% if estabelecimento.localizacao %}
+                                <p class="card-text">
+                                    <i class="bi bi-geo-alt"></i>
+                                    {{ estabelecimento.localizacao }}
+                                </p>
+                            {% endif %}
+                            
+                            {% if estabelecimento.telefone %}
+                                <p class="card-text">
+                                    <i class="bi bi-telephone"></i>
+                                    {{ estabelecimento.telefone }}
+                                </p>
+                            {% endif %}
+                            
+                            <div class="mt-3">
+                                <a href="{{ url_for('estabelecimentos.detalhes_estabelecimento', id=estabelecimento.id) }}" class="btn btn-outline-primary btn-sm">
+                                    Ver Detalhes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-info text-center">
+                    <p>Nenhum estabelecimento encontrado. Tente ajustar os filtros.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if estabelecimentos.pages > 1 %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if estabelecimentos.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('estabelecimentos.listar_estabelecimentos', pagina=estabelecimentos.prev_num, busca=request.args.get('busca', ''), categoria=request.args.get('categoria', '')) }}">
+                            Anterior
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for page_num in estabelecimentos.iter_pages(left_edge=1, left_margin=1, right_margin=1, right_edge=1) %}
+                    {% if page_num %}
+                        {% if page_num == estabelecimentos.page %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('estabelecimentos.listar_estabelecimentos', pagina=page_num, busca=request.args.get('busca', ''), categoria=request.args.get('categoria', '')) }}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if estabelecimentos.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('estabelecimentos.listar_estabelecimentos', pagina=estabelecimentos.next_num, busca=request.args.get('busca', ''), categoria=request.args.get('categoria', '')) }}">
+                            Próxima
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+
+<style>
+.estabelecimento-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #dee2e6;
+}
+
+.estabelecimento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
+</style>
+{% endblock %}

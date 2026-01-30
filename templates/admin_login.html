@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Painel Administrativo ConectAreal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body class="pagina-login">
+    <div class="container-login">
+        <div class="caixa-login">
+            <div class="marca-login">
+                <span class="icone-logo">🌍</span>
+                <h1>ConectAreal Admin</h1>
+            </div>
+
+            <form id="formularioLogin" class="formulario-login">
+                <div class="grupo-formulario">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario" required placeholder="Digite seu usuário">
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+                </div>
+
+                <button type="submit" class="botao-login">Entrar</button>
+
+                <div id="mensagemErro" class="mensagem-erro" style="display: none;"></div>
+            </form>
+
+            <div class="rodape-login">
+                <p>Acesso restrito ao painel administrativo</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='admin_login.js') }}"></script>
+</body>
+</html>
