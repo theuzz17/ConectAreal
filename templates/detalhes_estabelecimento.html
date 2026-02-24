@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+
+{% block title %}Detalhes - {{ estabelecimento.nome }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="card-title mb-3">{{ estabelecimento.nome }}</h1>
+                    
+                    <span class="badge bg-info mb-3">{{ estabelecimento.categoria }}</span>
+                    
+                    {% if estabelecimento.verificado %}
+                        <span class="badge bg-success mb-3">
+                            <i class="bi bi-check-circle"></i> Verificado
+                        </span>
+                    {% endif %}
+
+                    <h4 class="mt-4 mb-3">Descrição</h4>
+                    <p class="lead">{{ estabelecimento.descricao }}</p>
+
+                    <h4 class="mt-4 mb-3">Informações de Contato</h4>
+                    <div class="contact-info">
+                        {% if estabelecimento.telefone %}
+                            <p>
+                                <strong>Telefone:</strong><br>
+                                <a href="tel:{{ estabelecimento.telefone }}">{{ estabelecimento.telefone }}</a>
+                            </p>
+                        {% endif %}
+
+                        {% if estabelecimento.email %}
+                            <p>
+                                <strong>Email:</strong><br>
+                                <a href="mailto:{{ estabelecimento.email }}">{{ estabelecimento.email }}</a>
+                            </p>
+                        {% endif %}
+
+                        {% if estabelecimento.endereco %}
+                            <p>
+                                <strong>Endereço:</strong><br>
+                                {{ estabelecimento.endereco }}
+                            </p>
+                        {% endif %}
+
+                        {% if estabelecimento.localizacao %}
+                            <p>
+                                <strong>Localização:</strong><br>
+                                {{ estabelecimento.localizacao }}
+                            </p>
+                        {% endif %}
+
+                        {% if estabelecimento.website %}
+                            <p>
+                                <strong>Website:</strong><br>
+                                <a href="{{ estabelecimento.website }}" target="_blank">{{ estabelecimento.website }}</a>
+                            </p>
+                        {% endif %}
+
+                        {% if estabelecimento.horario_funcionamento %}
+                            <p>
+                                <strong>Horário de Funcionamento:</strong><br>
+                                {{ estabelecimento.horario_funcionamento }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    {% if current_user.is_authenticated and (current_user.id == estabelecimento.usuario_id or current_user.is_admin) %}
+                        <div class="mt-4">
+                            <a href="{{ url_for('estabelecimentos.editar_estabelecimento_page', id=estabelecimento.id) }}" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <button type="button" class="btn btn-danger" onclick="deletarEstabelecimento({{ estabelecimento.id }})">
+                                <i class="bi bi-trash"></i> Deletar
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Avaliações</h5>
+                    
+                    <div id="nota-media-container">
+                        <div class="text-center mb-3">
+                            <div id="nota-media" class="display-4">-</div>
+                            <div id="estrelas-media" class="mb-2"></div>
+                            <small id="total-avaliacoes" class="text-muted">0 avaliações</small>
+                        </div>
+                    </div>
+
+                    {% if current_user.is_authenticated %}
+                        <form id="form-avaliacao" class="mt-4 pt-3 border-top">
+                            <div class="mb-3">
+                                <label class="form-label">Sua avaliação</label>
+                                <div class="rating" id="rating-input">
+                                    {% for i in range(1, 6) %}
+                                        <i class="bi bi-star estrela" data-value="{{ i }}" style="cursor: pointer; font-size: 1.5rem; color: #ddd; margin-right: 5px;"></i>
+                                    {% endfor %}
+                                </div>
+                                <input type="hidden" id="nota" name="nota" value="0">
+                            </div>
+
+                            <div class="mb-3">
+                                <textarea 
+                                    class="form-control" 
+                                    id="comentario" 
+                                    name="comentario" 
+                                    rows="3" 
+                                    placeholder="Deixe um comentário (opcional)"
+                                    maxlength="500"
+                                ></textarea>
+                                <small class="text-muted">Máximo 500 caracteres</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Enviar Avaliação</button>
+                        </form>
+                    {% else %}
+                        <p class="alert alert-info mt-3">
+                            <a href="{{ url_for('auth.login_page') }}">Faça login</a> para avaliar este estabelecimento.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Comentários</h5>
+                    <div id="avaliacoes-container">
+                        <p class="text-muted text-center">Carregando avaliações...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const estabelecimentoId = {{ estabelecimento.id }};
+
+document.addEventListener('DOMContentLoaded', function() {
+    carregarAvaliacoes();
+    
+    const estrelasRating = document.querySelectorAll('#rating-input .estrela');
+    estrelasRating.forEach(estrela => {
+        estrela.addEventListener('click', function() {
+            const valor = this.getAttribute('data-value');
+            document.getElementById('nota').value = valor;
+            
+            estrelasRating.forEach((e, index) => {
+                if (index < valor) {
+                    e.classList.remove('bi-star');
+                    e.classList.add('bi-star-fill');
+                    e.style.color = '#ffc107';
+                } else {
+                    e.classList.remove('bi-star-fill');
+                    e.classList.add('bi-star');
+                    e.style.color = '#ddd';
+                }
+            });
+        });
+        
+        estrela.addEventListener('mouseover', function() {
+            const valor = this.getAttribute('data-value');
+            estrelasRating.forEach((e, index) => {
+                if (index < valor) {
+                    e.style.color = '#ffc107';
+                } else {
+                    e.style.color = '#ddd';
+                }
+            });
+        });
+    });
+    
+    document.getElementById('rating-input').addEventListener('mouseleave', function() {
+        const notaSelecionada = document.getElementById('nota').value;
+        estrelasRating.forEach((e, index) => {
+            if (index < notaSelecionada) {
+                e.style.color = '#ffc107';
+            } else {
+                e.style.color = '#ddd';
+            }
+        });
+    });
+    
+    if (document.getElementById('form-avaliacao')) {
+        document.getElementById('form-avaliacao').addEventListener('submit', enviarAvaliacao);
+    }
+});
+
+function carregarAvaliacoes() {
+    fetch(`/estabelecimentos/api/${estabelecimentoId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.sucesso) {
+                const estabelecimento = data.estabelecimento;
+                
+                document.getElementById('nota-media').textContent = estabelecimento.nota_media || '-';
+                document.getElementById('total-avaliacoes').textContent = `${estabelecimento.total_avaliacoes} avaliação(ões)`;
+                
+                const estrelas = Math.round(estabelecimento.nota_media);
+                let htmlEstrelas = '';
+                for (let i = 0; i < 5; i++) {
+                    if (i < estrelas) {
+                        htmlEstrelas += '<i class="bi bi-star-fill" style="color: #ffc107;"></i>';
+                    } else {
+                        htmlEstrelas += '<i class="bi bi-star" style="color: #ddd;"></i>';
+                    }
+                }
+                document.getElementById('estrelas-media').innerHTML = htmlEstrelas;
+                
+                const container = document.getElementById('avaliacoes-container');
+                if (estabelecimento.avaliacoes.length > 0) {
+                    let html = '';
+                    estabelecimento.avaliacoes.forEach(avaliacao => {
+                        let estrelasHtml = '';
+                        for (let i = 0; i < 5; i++) {
+                            if (i < avaliacao.nota) {
+                                estrelasHtml += '<i class="bi bi-star-fill" style="color: #ffc107; margin-right: 2px;"></i>';
+                            } else {
+                                estrelasHtml += '<i class="bi bi-star" style="color: #ddd; margin-right: 2px;"></i>';
+                            }
+                        }
+                        html += `
+                            <div class="border-bottom pb-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div>${estrelasHtml}</div>
+                                    <small class="text-muted">${new Date(avaliacao.criado_em).toLocaleDateString('pt-BR')}</small>
+                                </div>
+                                ${avaliacao.comentario ? `<p class="mb-0">${avaliacao.comentario}</p>` : ''}
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML = '<p class="text-muted text-center">Ainda não há avaliações.</p>';
+                }
+            }
+        })
+        .catch(error => console.error('Erro:', error));
+}
+
+function enviarAvaliacao(e) {
+    e.preventDefault();
+    
+    const nota = parseInt(document.getElementById('nota').value);
+    const comentario = document.getElementById('comentario').value;
+    
+    if (nota === 0) {
+        alert('Por favor, selecione uma nota');
+        return;
+    }
+    
+    fetch(`/estabelecimentos/api/avaliar/${estabelecimentoId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nota: nota,
+            comentario: comentario
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.sucesso) {
+            alert(data.mensagem);
+            document.getElementById('form-avaliacao').reset();
+            document.getElementById('nota').value = 0;
+            document.querySelectorAll('#rating-input .estrela').forEach(e => {
+                e.classList.remove('bi-star-fill');
+                e.classList.add('bi-star');
+                e.style.color = '#ddd';
+            });
+            carregarAvaliacoes();
+        } else {
+            alert(data.erro || 'Erro ao enviar avaliação');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao enviar avaliação');
+    });
+}
+
+function deletarEstabelecimento(id) {
+    if (confirm('Tem certeza que deseja deletar este estabelecimento? Esta ação não pode ser desfeita.')) {
+        fetch(`/estabelecimentos/api/deletar/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.sucesso) {
+                alert(data.mensagem);
+                window.location.href = '{{ url_for("estabelecimentos.listar_estabelecimentos") }}';
+            } else {
+                alert(data.erro || 'Erro ao deletar');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao deletar estabelecimento');
+        });
+    }
+}
+</script>
+
+<style>
+.contact-info p {
+    margin-bottom: 1rem;
+}
+
+.contact-info strong {
+    color: #333;
+}
+
+.rating {
+    display: flex;
+    gap: 5px;
+}
+
+.card {
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+</style>
+{% endblock %}

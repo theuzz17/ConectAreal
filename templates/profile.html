@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - ConectAreal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-section h2 {
+            color: #3498db;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-group input[readonly] {
+            background-color: #ecf0f1;
+            cursor: not-allowed;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+        }
+
+        .btn-success:hover {
+            background-color: #229954;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fadbd8;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            color: #27ae60;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #d5f4e6;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .info {
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .profile-info-item {
+            text-align: center;
+        }
+
+        .profile-info-label {
+            color: #7f8c8d;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .profile-info-value {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .spinner {
+            display: none;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Meu Perfil</h1>
+        
+        <div class="error" id="errorMsg"></div>
+        <div class="success" id="successMsg"></div>
+
+        <div class="profile-section">
+            <h2>Informações Pessoais</h2>
+            
+            <div class="profile-info">
+                <div class="profile-info-item">
+                    <div class="profile-info-label">Usuário</div>
+                    <div class="profile-info-value" id="profileUsername">-</div>
+                </div>
+                <div class="profile-info-item">
+                    <div class="profile-info-label">Membro desde</div>
+                    <div class="profile-info-value" id="profileCreatedAt">-</div>
+                </div>
+                <div class="profile-info-item">
+                    <div class="profile-info-label">Email Confirmado</div>
+                    <div class="profile-info-value" id="profileEmailConfirmed">-</div>
+                </div>
+                <div class="profile-info-item">
+                    <div class="profile-info-label">Último Login</div>
+                    <div class="profile-info-value" id="profileLastLogin">-</div>
+                </div>
+            </div>
+
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Atualizar Perfil</button>
+            </form>
+            <div class="spinner" id="profileSpinner"></div>
+        </div>
+
+        <div class="profile-section">
+            <h2>Alterar Senha</h2>
+            
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="old_password">Senha Atual</label>
+                    <input type="password" id="old_password" name="old_password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password">Nova Senha</label>
+                    <input type="password" id="new_password" name="new_password" required minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password_confirm">Confirmar Nova Senha</label>
+                    <input type="password" id="new_password_confirm" name="new_password_confirm" required minlength="6">
+                </div>
+
+                <button type="submit" class="btn btn-danger">Alterar Senha</button>
+            </form>
+            <div class="spinner" id="passwordSpinner"></div>
+        </div>
+
+        <div class="profile-section">
+            <h2>Ações</h2>
+            <a href="/" class="btn">Voltar para Home</a>
+            <a href="/logout" class="btn btn-danger">Sair</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='auth.js') }}"></script>
+    <script>
+        const profileForm = document.getElementById('profileForm');
+        const passwordForm = document.getElementById('passwordForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
+        const profileSpinner = document.getElementById('profileSpinner');
+        const passwordSpinner = document.getElementById('passwordSpinner');
+
+        async function loadProfile() {
+            try {
+                const response = await fetch('/api/user/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+                    
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('profileUsername').textContent = user.username;
+                    document.getElementById('profileEmailConfirmed').textContent = user.email_confirmed ? '✓ Confirmado' : '✗ Pendente';
+                    
+                    if (user.created_at) {
+                        const date = new Date(user.created_at);
+                        document.getElementById('profileCreatedAt').textContent = date.toLocaleDateString('pt-BR');
+                    }
+                    
+                    if (user.last_login) {
+                        const date = new Date(user.last_login);
+                        document.getElementById('profileLastLogin').textContent = date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR');
+                    } else {
+                        document.getElementById('profileLastLogin').textContent = 'Nunca';
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar perfil:', error);
+                errorMsg.textContent = 'Erro ao carregar perfil. Tente novamente.';
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            profileSpinner.style.display = 'block';
+
+            const email = document.getElementById('email').value;
+
+            try {
+                const result = await authManager.updateProfile(email);
+                
+                if (result.sucesso) {
+                    successMsg.textContent = result.mensagem;
+                    successMsg.style.display = 'block';
+                } else {
+                    errorMsg.textContent = result.erro;
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Erro ao atualizar perfil.';
+                errorMsg.style.display = 'block';
+                console.error('Erro:', error);
+            } finally {
+                profileSpinner.style.display = 'none';
+            }
+        });
+
+        passwordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            passwordSpinner.style.display = 'block';
+
+            const oldPassword = document.getElementById('old_password').value;
+            const newPassword = document.getElementById('new_password').value;
+            const newPasswordConfirm = document.getElementById('new_password_confirm').value;
+
+            if (newPassword !== newPasswordConfirm) {
+                errorMsg.textContent = 'As senhas não correspondem';
+                errorMsg.style.display = 'block';
+                passwordSpinner.style.display = 'none';
+                return;
+            }
+
+            try {
+                const result = await authManager.changePassword(oldPassword, newPassword, newPasswordConfirm);
+                
+                if (result.sucesso) {
+                    successMsg.textContent = result.mensagem;
+                    successMsg.style.display = 'block';
+                    passwordForm.reset();
+                } else {
+                    errorMsg.textContent = result.erro;
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Erro ao alterar senha.';
+                errorMsg.style.display = 'block';
+                console.error('Erro:', error);
+            } finally {
+                passwordSpinner.style.display = 'none';
+            }
+        });
+
+        loadProfile();
+    </script>
+</body>
+</html>

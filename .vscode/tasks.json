@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Iniciar servidor Flask",
+			"type": "shell",
+			"command": "python app.py",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Iniciar servidor Flask",
+			"type": "shell",
+			"command": "python app.py",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Iniciar servidor Flask",
+			"type": "shell",
+			"command": "python app.py",
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}

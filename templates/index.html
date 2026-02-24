@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ConectAreal - Plataforma colaborativa do bairro Areal, Mamanguape - PB.">
+    <meta name="theme-color" content="#2d8659">
+    <title>ConectAreal - Conectando Pessoas e Serviços</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="barra-navegacao" id="barraNavegacao">
+        <div class="container">
+            <div class="conteudo-barra-navegacao">
+                <div class="marca-barra-navegacao">
+                    <span class="icone-logo">🌍</span>
+                    <span>ConectAreal</span>
+                </div>
+
+                <button class="alternador-barra-navegacao" id="alternadorBarraNavegacao">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="menu-barra-navegacao" id="menuBarraNavegacao">
+                    <li><a href="#inicio" class="link-navegacao">Início</a></li>
+                    <li><a href="#estabelecimentos" class="link-navegacao">Estabelecimentos</a></li>
+                    <li><a href="#prestadores" class="link-navegacao">Prestadores</a></li>
+                    <li><a href="#contato" class="link-navegacao">Contato</a></li>
+                    <li><a href="/admin/login" class="link-navegacao">Admin</a></li>
+                </ul>
+
+                <button class="btn btn-primario" onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'})">Cadastre-se</button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="secao-hero">
+        <div class="fundo-hero"></div>
+        <div class="container">
+            <div class="conteudo-hero">
+                <div class="emblema-hero">Bem-vindo ao ConectAreal</div>
+                <h1 class="titulo-hero">Conectando <span class="texto-gradiente">Pessoas, Serviços e Oportunidades</span></h1>
+                <p class="subtitulo-hero">Plataforma colaborativa que une moradores, profissionais e comércios locais.</p>
+                <div class="botoes-hero">
+                    <a href="#estabelecimentos" class="btn btn-primario btn-lg">Explorar Serviços</a>
+                    <a href="#contato" class="btn btn-contorno btn-lg">Cadastre-se Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="estabelecimentos" class="secao-busca">
+        <div class="container">
+            <h2 class="titulo-secao">Encontre o que Precisa</h2>
+            <div class="barra-busca">
+                <input type="text" id="entradaBusca" placeholder="Buscar serviços, profissionais, comércios..." class="entrada-busca">
+                <button class="btn-busca">🔍</button>
+            </div>
+
+            <div class="abas-filtro">
+                <button class="aba-filtro ativo" data-filter="todos">Todos</button>
+                <button class="aba-filtro" data-filter="servicos">Serviços</button>
+                <button class="aba-filtro" data-filter="profissionais">Profissionais</button>
+                <button class="aba-filtro" data-filter="comercios">Comércios</button>
+                <button class="aba-filtro" data-filter="instituicoes">Instituições</button>
+            </div>
+
+            <div class="grade-servicos" id="gradeServicos"></div>
+        </div>
+    </section>
+
+    <section class="secao-moradores">
+        <div class="container">
+            <h2 class="titulo-secao">Para Moradores</h2>
+            <div class="grade-recursos">
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">👥</div>
+                    <h3>Conecte-se</h3>
+                    <p>Conheça seus vizinhos e forme redes de apoio locais.</p>
+                </div>
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">🔍</div>
+                    <h3>Encontre Serviços</h3>
+                    <p>Profissionais e comércios locais de confiança.</p>
+                </div>
+                <div class="cartao-recurso">
+                    <div class="icone-recurso">📚</div>
+                    <h3>Aprenda</h3>
+                    <p>Conteúdos educativos para a comunidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao-educacao">
+        <div class="container">
+            <h2 class="titulo-secao">Educomunicação</h2>
+            <p class="subtitulo-secao">Conteúdos educativos para fortalecer a cidadania.</p>
+            <div class="grade-educacao">
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">📚</div>
+                    <h3>Desenvolvimento Territorial</h3>
+                    <p>Como contribuir para o seu bairro.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
+                </div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">🏛️</div>
+                    <h3>Cidadania Ativa</h3>
+                    <p>Direitos e deveres na comunidade.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
+                </div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">🤝</div>
+                    <h3>Economia Solidária</h3>
+                    <p>Negócios colaborativos e sustentáveis.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
+                </div>
+                <div class="cartao-educacao">
+                    <div class="icone-educacao">📢</div>
+                    <h3>Comunicação Comunitária</h3>
+                    <p>Ferramentas para fortalecer a comunicação local.</p>
+                    <a href="#" class="ler-mais">Saiba mais →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prestadores" class="secao-profissionais">
+        <div class="container">
+            <h2 class="titulo-secao">Prestadores de Serviço do Bairro</h2>
+            <p class="subtitulo-secao">Conecte-se com profissionais qualificados.</p>
+            <div class="grade-profissionais" id="gradePrestadores"></div>
+        </div>
+    </section>
+
+    <section class="secao-cta">
+        <div class="container">
+            <h2>Pronto para Conectar?</h2>
+            <p>Cadastre-se e faça parte da comunidade.</p>
+            <a href="#contato" class="btn btn-acao">Cadastrar Agora</a>
+        </div>
+    </section>
+
+    <section id="contato" class="secao-contato">
+        <div class="container">
+            <h2 class="titulo-secao">Entre em Contato</h2>
+            <p class="subtitulo-secao">Tem dúvidas ou sugestões? Queremos ouvir você!</p>
+            <div class="conteudo-contato">
+                <div class="informacoes-contato">
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📧</div>
+                        <h3>Email</h3>
+                        <p class="texto-informacao">arealconect@gmail.com</p>
+                        <small>Responderemos em 24h</small>
+                    </div>
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📞</div>
+                        <h3>Telefone</h3>
+                        <p class="texto-informacao">(81) 99765-4263</p>
+                        <small>Seg-Sex: 9h às 18h</small>
+                    </div>
+                    <div class="cartao-informacao">
+                        <div class="icone-informacao">📍</div>
+                        <h3>Localização</h3>
+                        <p class="texto-informacao">Bairro do Areal, Mamanguape - PB</p>
+                        <small>Visite nosso escritório</small>
+                    </div>
+                </div>
+
+                <form id="formularioContato" class="formulario-contato">
+                    <div class="grupo-formulario">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <small class="erro-msg" id="erroEmail" aria-live="polite"></small>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone">
+                        <small class="erro-msg" id="erroTelefone" aria-live="polite"></small>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="assunto">Assunto</label>
+                        <select id="assunto" name="assunto" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="sugestao">Sugestão</option>
+                            <option value="reclamacao">Reclamação</option>
+                            <option value="parceria">Parceria</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primario btn-bloco">Enviar Mensagem</button>
+                    <div id="mensagemFormulario" class="form-mensagem" aria-live="polite"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="rodape">
+        <div class="container">
+            <div class="conteudo-rodape">
+                <div class="secao-rodape">
+                    <h3>ConectAreal</h3>
+                    <p>Conectando moradores, profissionais e comércios locais.</p>
+                </div>
+                <div class="secao-rodape">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#estabelecimentos">Serviços</a></li>
+                        <li><a href="#prestadores">Profissionais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="secao-rodape">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>📞 (81) 99765-4263</li>
+                        <li>📧 arealconect@gmail.com</li>
+                        <li>📍 Bairro do Areal, Mamanguape - PB</li>
+                    </ul>
+                </div>
+                <div class="secao-rodape">
+                    <h4>Redes Sociais</h4>
+                    <div class="links-sociais">
+                        <a href="#" class="link-social">f</a>
+                        <a href="#" class="link-social">📷</a>
+                        <a href="#" class="link-social">𝕏</a>
+                    </div>
+                </div>
+            </div>
+            <div class="rodape-inferior">
+                <p>&copy; 2025 ConectAreal. Todos os direitos reservados.</p>
+                <div class="links-rodape">
+                    <a href="#">Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

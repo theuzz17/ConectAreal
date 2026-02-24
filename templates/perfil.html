@@ -1,0 +1,622 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil - ConectAreal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <div class="foto-perfil-container mb-3">
+                        {% if user.foto_url %}
+                            <img src="{{ user.foto_url }}" alt="{{ user.username }}" class="foto-perfil">
+                        {% else %}
+                            <div class="foto-padrao">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <h3 class="card-title">{{ user.username }}</h3>
+                    
+                    {% if user.nome_completo %}
+                        <p class="text-muted">{{ user.nome_completo }}</p>
+                    {% endif %}
+                    
+                    <div class="estatisticas mt-4">
+                        <div class="stat-item">
+                            <div class="stat-numero">{{ total_estabelecimentos }}</div>
+                            <div class="stat-label">Estabelecimentos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-numero">{{ total_avaliacoes }}</div>
+                            <div class="stat-label">Avaliações</div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="info-perfil">
+                        <p class="mb-2">
+                            <strong>Email:</strong><br>
+                            {{ user.email }}
+                        </p>
+                        
+                        {% if user.telefone %}
+                            <p class="mb-2">
+                                <strong>Telefone:</strong><br>
+                                {{ user.telefone }}
+                            </p>
+                        {% endif %}
+                        
+                        {% if user.bairro %}
+                            <p class="mb-2">
+                                <strong>Bairro:</strong><br>
+                                {{ user.bairro }}
+                            </p>
+                        {% endif %}
+                        
+                        <p class="mb-2">
+                            <strong>Membro desde:</strong><br>
+                            {{ user.created_at.strftime('%d/%m/%Y') if user.created_at else 'N/A' }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <ul class="nav nav-tabs mb-4" id="abas-perfil" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="aba-dados" data-bs-toggle="tab" data-bs-target="#dados" type="button">
+                        Dados Pessoais
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="aba-seguranca" data-bs-toggle="tab" data-bs-target="#seguranca" type="button">
+                        Segurança
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="aba-atividades" data-bs-toggle="tab" data-bs-target="#atividades" type="button">
+                        Atividades
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="aba-conta" data-bs-toggle="tab" data-bs-target="#conta" type="button">
+                        Conta
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="conteudo-abas">
+                <div class="tab-pane fade show active" id="dados" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Editar Dados Pessoais</h5>
+                            
+                            <form id="form-dados-pessoais">
+                                <div class="mb-3">
+                                    <label for="nome_completo" class="form-label">Nome Completo</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="nome_completo" 
+                                        value="{{ user.nome_completo or '' }}"
+                                        maxlength="255"
+                                    >
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="telefone" class="form-label">Telefone</label>
+                                            <input 
+                                                type="tel" 
+                                                class="form-control" 
+                                                id="telefone" 
+                                                value="{{ user.telefone or '' }}"
+                                                placeholder="(00) 00000-0000"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                                            <input 
+                                                type="date" 
+                                                class="form-control" 
+                                                id="data_nascimento" 
+                                                value="{{ user.data_nascimento.isoformat() if user.data_nascimento else '' }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="bio" class="form-label">Sobre Você</label>
+                                    <textarea 
+                                        class="form-control" 
+                                        id="bio" 
+                                        rows="3"
+                                        maxlength="500"
+                                        placeholder="Conte um pouco sobre você..."
+                                    >{{ user.bio or '' }}</textarea>
+                                    <small class="text-muted">Máximo 500 caracteres</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="endereco" class="form-label">Endereço</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="endereco" 
+                                        value="{{ user.endereco or '' }}"
+                                        maxlength="255"
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="bairro" class="form-label">Bairro</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="bairro" 
+                                        value="{{ user.bairro or '' }}"
+                                        maxlength="100"
+                                    >
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                            </form>
+
+                            <div id="alerta-dados" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="seguranca" role="tabpanel">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Alterar Email</h5>
+                            
+                            <form id="form-alterar-email">
+                                <div class="mb-3">
+                                    <label for="email_atual" class="form-label">Email Atual</label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        value="{{ user.email }}"
+                                        disabled
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="novo_email" class="form-label">Novo Email</label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="novo_email" 
+                                        placeholder="novo@email.com"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="senha_email" class="form-label">Confirme sua Senha</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="senha_email" 
+                                        placeholder="Digite sua senha"
+                                        required
+                                    >
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Alterar Email</button>
+                            </form>
+
+                            <div id="alerta-email" class="mt-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Alterar Senha</h5>
+                            
+                            <form id="form-alterar-senha">
+                                <div class="mb-3">
+                                    <label for="senha_atual" class="form-label">Senha Atual</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="senha_atual" 
+                                        placeholder="Digite sua senha atual"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="nova_senha" class="form-label">Nova Senha</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="nova_senha" 
+                                        placeholder="Digite a nova senha (mínimo 6 caracteres)"
+                                        minlength="6"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="confirmar_senha" class="form-label">Confirmar Nova Senha</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="confirmar_senha" 
+                                        placeholder="Confirme a nova senha"
+                                        minlength="6"
+                                        required
+                                    >
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                            </form>
+
+                            <div id="alerta-senha" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="atividades" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Minhas Atividades</h5>
+                            
+                            <div id="container-atividades">
+                                <p class="text-muted text-center">Carregando atividades...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="conta" role="tabpanel">
+                    <div class="card border-danger">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger mb-4">Excluir Conta</h5>
+                            
+                            <p class="text-muted mb-3">
+                                Ao excluir sua conta, todos os seus dados serão removidos permanentemente. 
+                                Esta ação não pode ser desfeita.
+                            </p>
+                            
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluirConta">
+                                Excluir Minha Conta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalExcluirConta" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Excluir Conta</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Atenção!</strong> Esta ação é irreversível.</p>
+                <p>Todos os seus dados serão permanentemente removidos:</p>
+                <ul>
+                    <li>Perfil e informações pessoais</li>
+                    <li>Estabelecimentos cadastrados</li>
+                    <li>Avaliações realizadas</li>
+                </ul>
+                
+                <div class="mt-3">
+                    <label for="senha_excluir" class="form-label">Digite sua senha para confirmar:</label>
+                    <input 
+                        type="password" 
+                        class="form-control" 
+                        id="senha_excluir" 
+                        placeholder="Sua senha"
+                    >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="confirmarExclusaoConta()">Excluir Conta</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.foto-perfil-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.foto-perfil {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e9ecef;
+}
+
+.foto-padrao {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #adb5bd;
+}
+
+.estatisticas {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-numero {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.info-perfil p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #007bff;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+    background-color: transparent;
+}
+
+.card {
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+</style>
+
+<script>
+document.getElementById('form-dados-pessoais').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const dados = {
+        nome_completo: document.getElementById('nome_completo').value || null,
+        telefone: document.getElementById('telefone').value || null,
+        data_nascimento: document.getElementById('data_nascimento').value || null,
+        bio: document.getElementById('bio').value || null,
+        endereco: document.getElementById('endereco').value || null,
+        bairro: document.getElementById('bairro').value || null
+    };
+    
+    try {
+        const resposta = await fetch('/perfil/api/atualizar', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+        
+        const resultado = await resposta.json();
+        mostrarAlerta('alerta-dados', resultado.mensagem, resultado.sucesso ? 'success' : 'danger');
+        
+        if (resultado.sucesso) {
+            setTimeout(() => location.reload(), 1500);
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        mostrarAlerta('alerta-dados', 'Erro ao atualizar dados', 'danger');
+    }
+});
+
+document.getElementById('form-alterar-email').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const novo_email = document.getElementById('novo_email').value;
+    const senha = document.getElementById('senha_email').value;
+    
+    try {
+        const resposta = await fetch('/perfil/api/alterar-email', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                novo_email: novo_email,
+                senha: senha
+            })
+        });
+        
+        const resultado = await resposta.json();
+        mostrarAlerta('alerta-email', resultado.mensagem || resultado.erro, resultado.sucesso ? 'success' : 'danger');
+        
+        if (resultado.sucesso) {
+            document.getElementById('form-alterar-email').reset();
+            setTimeout(() => location.reload(), 1500);
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        mostrarAlerta('alerta-email', 'Erro ao alterar email', 'danger');
+    }
+});
+
+document.getElementById('form-alterar-senha').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const senha_atual = document.getElementById('senha_atual').value;
+    const nova_senha = document.getElementById('nova_senha').value;
+    const confirmar_senha = document.getElementById('confirmar_senha').value;
+    
+    if (nova_senha !== confirmar_senha) {
+        mostrarAlerta('alerta-senha', 'As senhas não coincidem', 'danger');
+        return;
+    }
+    
+    try {
+        const resposta = await fetch('/perfil/api/alterar-senha', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                senha_atual: senha_atual,
+                nova_senha: nova_senha,
+                confirmar_senha: confirmar_senha
+            })
+        });
+        
+        const resultado = await resposta.json();
+        mostrarAlerta('alerta-senha', resultado.mensagem || resultado.erro, resultado.sucesso ? 'success' : 'danger');
+        
+        if (resultado.sucesso) {
+            document.getElementById('form-alterar-senha').reset();
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        mostrarAlerta('alerta-senha', 'Erro ao alterar senha', 'danger');
+    }
+});
+
+document.getElementById('aba-atividades').addEventListener('click', function() {
+    carregarAtividades();
+});
+
+async function carregarAtividades() {
+    try {
+        const resposta = await fetch('/perfil/api/atividades');
+        const resultado = await resposta.json();
+        
+        if (resultado.sucesso) {
+            const container = document.getElementById('container-atividades');
+            let html = '<div class="timeline">';
+            
+            if (resultado.atividades.estabelecimentos_criados.length > 0) {
+                html += '<h6 class="mb-3">Estabelecimentos Criados</h6>';
+                resultado.atividades.estabelecimentos_criados.forEach(estab => {
+                    const data = new Date(estab.criado_em).toLocaleDateString('pt-BR');
+                    html += `
+                        <div class="atividade-item mb-3">
+                            <strong>${estab.nome}</strong>
+                            <br>
+                            <small class="text-muted">Criado em ${data}</small>
+                        </div>
+                    `;
+                });
+            }
+            
+            if (resultado.atividades.avaliacoes.length > 0) {
+                html += '<h6 class="mb-3 mt-4">Avaliações Recentes</h6>';
+                resultado.atividades.avaliacoes.forEach(aval => {
+                    const data = new Date(aval.criado_em).toLocaleDateString('pt-BR');
+                    html += `
+                        <div class="atividade-item mb-3">
+                            <strong>Avaliação - ${aval.nota} ⭐</strong>
+                            <br>
+                            <small class="text-muted">${aval.comentario ? `"${aval.comentario}"` : 'Sem comentário'}</small>
+                            <br>
+                            <small class="text-muted">em ${data}</small>
+                        </div>
+                    `;
+                });
+            }
+            
+            if (resultado.atividades.estabelecimentos_criados.length === 0 && resultado.atividades.avaliacoes.length === 0) {
+                html = '<p class="text-muted text-center">Você ainda não tem atividades</p>';
+            }
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        document.getElementById('container-atividades').innerHTML = '<p class="text-danger">Erro ao carregar atividades</p>';
+    }
+}
+
+async function confirmarExclusaoConta() {
+    const senha = document.getElementById('senha_excluir').value;
+    
+    if (!senha) {
+        alert('Digite sua senha para confirmar');
+        return;
+    }
+    
+    if (!confirm('Esta ação é irreversível. Tem certeza que deseja excluir sua conta?')) {
+        return;
+    }
+    
+    try {
+        const resposta = await fetch('/perfil/api/excluir-conta', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                senha: senha
+            })
+        });
+        
+        const resultado = await resposta.json();
+        
+        if (resultado.sucesso) {
+            alert(resultado.mensagem);
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        } else {
+            alert(resultado.erro || 'Erro ao excluir conta');
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        alert('Erro ao excluir conta');
+    }
+}
+
+function mostrarAlerta(elementId, mensagem, tipo) {
+    const container = document.getElementById(elementId);
+    container.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+}
+</script>
+{% endblock %}
