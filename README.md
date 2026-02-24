@@ -24,35 +24,17 @@ A plataforma foi construída seguindo rigorosos princípios de Engenharia de Sof
 Stack Tecnológica
 Linguagem: Python
 
-Framework Web: Flask
-
+Framework Web: Flask,Django
 
 Banco de Dados: SQLite (Desenvolvimento) / PostgreSQL (Produção) 
 
 
 Frontend: HTML5, CSS3, JavaScript (Prototipado no Figma) 
+ 
+Infraestrutura: Docker Compose
 
 
-Mobile: Planejado em Flutter ou React Native 
-
-Infraestrutura: Docker & Docker Compose
-
-Funcionalidades Implementadas
-[x] Sistema de Autenticação (Login/Registro/Recuperação de senha).
-
-[x] Gerenciamento de Estabelecimentos (CRUD completo).
-
-[x] Mapeamento georreferenciado de serviços.
-
-[x] Painel administrativo para a Associação de Moradores.
-
-[x] Interface responsiva e acessível.
-
-🚀 Como Executar
-Pré-requisitos
-Python 3.x
-
-Docker (opcional)
+[x] Interface responsiva
 
 📬 Contato
 
